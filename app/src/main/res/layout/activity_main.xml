@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <ListView
+        android:id="@+id/packages_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/add_notice_button"
+        tools:listheader="@layout/notices_header"
+        tools:listitem="@layout/notice_item" />
+
+    <Button
+        android:id="@+id/add_notice_button"
+        style="@style/Buttons"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add_notice" />
+
+</RelativeLayout>
