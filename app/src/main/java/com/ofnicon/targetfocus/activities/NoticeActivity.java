@@ -10,10 +10,17 @@ import com.ofnicon.targetfocus.R;
 
 public class NoticeActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private int index;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
+
+        Intent inputData = getIntent();
+        index = inputData.getIntExtra(MainActivity.INDEX_FIELD, -1);
+        ((EditText) findViewById(R.id.goal_et)).setText(inputData.getStringExtra(MainActivity.TEXT_FIELD));
+
         findViewById(R.id.ok_button).setOnClickListener(this);
         findViewById(R.id.delete_button).setOnClickListener(this);
     }
@@ -23,12 +30,13 @@ public class NoticeActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.ok_button:
                 Intent intent = new Intent();
-                intent.putExtra("text", ((EditText) findViewById(R.id.goal_et)).getText().toString().trim());
+                intent.putExtra(MainActivity.INDEX_FIELD, index);
+                intent.putExtra(MainActivity.TEXT_FIELD, ((EditText) findViewById(R.id.goal_et)).getText().toString().trim());
                 setResult(MainActivity.RESULT_OK, intent);
                 finish();
                 break;
             case R.id.delete_button:
-                setResult(MainActivity.RESULT_DELETE);
+                setResult(MainActivity.RESULT_DELETE, new Intent().putExtra(MainActivity.INDEX_FIELD, index));
                 finish();
                 break;
         }

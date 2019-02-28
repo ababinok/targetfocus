@@ -2,4 +2,6 @@
     <string name="app_name">Целевой фокус</string>
     <string name="your_goal_hint">Ваша цель</string>
     <string name="add_notice">Добавить цель</string>
+    <string name="delete">Удалить</string>
+    <string name="save">Сохранить</string>
 </resources>

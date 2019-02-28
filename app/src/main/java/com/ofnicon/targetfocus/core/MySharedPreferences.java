@@ -42,14 +42,14 @@ public class MySharedPreferences {
         return result;
     }
 
-    static void saveStringSet(Context context, String parameterName, Set<String> value) {
+    public static void saveStringSet(Context context, String parameterName, Set<String> value) {
         SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putStringSet(parameterName, value);
         editor.apply();
     }
 
-    static Set<String> getStringSet(Context context, String parameterName) {
+    public static Set<String> getStringSet(Context context, String parameterName) {
         SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         Set<String> result = null;
         if (preferences.contains(parameterName)) {

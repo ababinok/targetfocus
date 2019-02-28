@@ -6,17 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ofnicon.targetfocus.R;
 import com.ofnicon.targetfocus.objects.Notice;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class NoticesAdapter extends ArrayAdapter<Notice> {
 
-    public NoticesAdapter(Context context, ArrayList<Notice> objects) {
+    public NoticesAdapter(Context context, List<Notice> objects) {
         super(context, 0, objects);
     }
 
