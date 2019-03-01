@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.ofnicon.targetfocus.R;
@@ -21,17 +22,30 @@ public class NoticeActivity extends AppCompatActivity implements View.OnClickLis
         index = inputData.getIntExtra(MainActivity.INDEX_FIELD, -1);
         ((EditText) findViewById(R.id.goal_et)).setText(inputData.getStringExtra(MainActivity.TEXT_FIELD));
 
+        Button deleteBtn = findViewById(R.id.delete_button);
+
         findViewById(R.id.ok_button).setOnClickListener(this);
-        findViewById(R.id.delete_button).setOnClickListener(this);
+        deleteBtn.setOnClickListener(this);
+        if (index < 0) {
+            deleteBtn.setVisibility(View.GONE);
+            findViewById(R.id.button_divider).setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ok_button:
+                EditText goalET = findViewById(R.id.goal_et);
+                String text = goalET.getText().toString().trim();
+                if (text.length() == 0) {
+                    goalET.setError(getString(R.string.enter_goal));
+                    goalET.requestFocus();
+                    return;
+                }
                 Intent intent = new Intent();
                 intent.putExtra(MainActivity.INDEX_FIELD, index);
-                intent.putExtra(MainActivity.TEXT_FIELD, ((EditText) findViewById(R.id.goal_et)).getText().toString().trim());
+                intent.putExtra(MainActivity.TEXT_FIELD, text);
                 setResult(MainActivity.RESULT_OK, intent);
                 finish();
                 break;

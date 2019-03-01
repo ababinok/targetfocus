@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Целевой фокус</string>
+    <string name="app_name">Целевой Фокус</string>
     <string name="your_goal_hint">Ваша цель</string>
     <string name="add_notice">Добавить цель</string>
     <string name="delete">Удалить</string>
     <string name="save">Сохранить</string>
+    <string name="enter_goal">Введите цель</string>
+    <string name="title_activity_test">testActiv</string>
 </resources>

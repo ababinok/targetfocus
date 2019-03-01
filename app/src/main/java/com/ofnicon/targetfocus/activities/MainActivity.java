@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.add_notice_button).setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(
@@ -90,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
                 String newText = data.getStringExtra(TEXT_FIELD);
                 if (indexToChange >= 0) {
                     notices.get(indexToChange).setText(newText);
-                    noticesAdapter.notifyDataSetChanged();
                 } else {
                     notices.add(new Notice(newText));
                 }
+                noticesAdapter.notifyDataSetChanged();
                 saveNotices();
             } else if (resultCode == RESULT_DELETE) {
                 int indexToRemove = data.getIntExtra(INDEX_FIELD, -1);
