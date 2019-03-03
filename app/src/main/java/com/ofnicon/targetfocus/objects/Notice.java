@@ -11,14 +11,6 @@ public class Notice {
         this.text = text;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public static List<String> getStringListFromNoticeList(List<Notice> notices) {
         List<String> result = new ArrayList<>();
         for (Notice notice : notices) {
@@ -33,6 +25,14 @@ public class Notice {
             result.add(new Notice(string));
         }
         return result;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
 }

@@ -3,12 +3,12 @@ package com.ofnicon.targetfocus.core;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class MySharedPreferences {
 
-    private static final String APP_PREFERENCES = "StopDrinkingSettings";
+    public static final String GOALS_LIST_NAME = "GOALS LIST";
+    private static final String APP_PREFERENCES = "TARGET_FOCUS_SETTINGS";
 
     static void setStringParameter(Context context, String parameterName, String value) {
         SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);

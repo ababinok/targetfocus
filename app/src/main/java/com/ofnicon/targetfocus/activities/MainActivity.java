@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.ofnicon.targetfocus.R;
 import com.ofnicon.targetfocus.adapters.NoticesAdapter;
+import com.ofnicon.targetfocus.core.Core;
 import com.ofnicon.targetfocus.core.MySharedPreferences;
 import com.ofnicon.targetfocus.objects.Notice;
 
@@ -24,14 +25,12 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_NOTICE_ACTIVITY = 0;
     static final int RESULT_OK = 10;
     static final int RESULT_DELETE = 11;
     static final int RESULT_CANCEL = 12;
     static final String INDEX_FIELD = "index";
     static final String TEXT_FIELD = "text";
-    private static final String PREFERENCES_NOTICES_LIST = "my notices list";
-
+    private static final int REQUEST_CODE_NOTICE_ACTIVITY = 0;
     List<Notice> notices;
     NoticesAdapter noticesAdapter;
 
@@ -42,20 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        @SuppressLint("InflateParams") final View header = LayoutInflater.from(this).inflate(R.layout.notices_header, null);
+        Core.initNotificationChannel(this);
 
+        @SuppressLint("InflateParams") final View header = LayoutInflater.from(this).inflate(R.layout.notices_header, null);
         final ListView listView = findViewById(R.id.packages_list);
         listView.addHeaderView(header);
 
-        Set<String> savedNotices = MySharedPreferences.getStringSet(this, PREFERENCES_NOTICES_LIST);
+        Set<String> savedNotices = MySharedPreferences.getStringSet(this, MySharedPreferences.GOALS_LIST_NAME);
         if (savedNotices != null) {
             notices = Notice.getNoticeListFromStringList(new ArrayList<>(savedNotices));
         } else {
             notices = new ArrayList<>();
         }
-
         noticesAdapter = new NoticesAdapter(this, notices);
-
         listView.setAdapter(noticesAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -109,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveNotices() {
-        MySharedPreferences.saveStringSet(this, PREFERENCES_NOTICES_LIST,
+        MySharedPreferences.saveStringSet(this, MySharedPreferences.GOALS_LIST_NAME,
                 new HashSet<>(Notice.getStringListFromNoticeList(notices)));
     }
 

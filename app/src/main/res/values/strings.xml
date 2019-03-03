@@ -4,6 +4,9 @@
     <string name="add_notice">Добавить цель</string>
     <string name="delete">Удалить</string>
     <string name="save">Сохранить</string>
+    <string name="share">Поделиться</string>
     <string name="enter_goal">Введите цель</string>
     <string name="title_activity_test">testActiv</string>
+    <string name="header_text">Цель</string>
+    <string name="enter_your_goal">Добавьте вашу цель</string>
 </resources>
