@@ -20,9 +20,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="24dp"
-        app:maxImageSize="56dp"
-        app:elevation="16dp"
         app:backgroundTint="@color/white"
+        app:elevation="16dp"
+        app:maxImageSize="56dp"
         app:srcCompat="@drawable/ic_fab_add" />
 
 

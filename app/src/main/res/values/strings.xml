@@ -9,4 +9,5 @@
     <string name="title_activity_test">testActiv</string>
     <string name="header_text">Цель</string>
     <string name="enter_your_goal">Добавьте вашу цель</string>
+    <string name="periodic_reminders_header">Периодическое напоминание о случайной цели (раз в час)</string>
 </resources>

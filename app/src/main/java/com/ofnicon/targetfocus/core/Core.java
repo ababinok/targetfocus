@@ -30,7 +30,7 @@ public class Core {
 
     private static String getNotificationText(Context context) {
         List<String> notices;
-        Set<String> savedNotices = MySharedPreferences.getStringSet(context, MySharedPreferences.GOALS_LIST_NAME);
+        Set<String> savedNotices = MySharedPreferences.getStringSet(context, MySharedPreferences.GOALS_LIST);
         if (savedNotices != null) {
             notices = new ArrayList<>(savedNotices);
         } else {

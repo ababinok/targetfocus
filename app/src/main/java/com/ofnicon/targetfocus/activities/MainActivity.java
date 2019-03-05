@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.ofnicon.targetfocus.R;
 import com.ofnicon.targetfocus.adapters.NoticesAdapter;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_NOTICE_ACTIVITY = 0;
     List<Notice> notices;
     NoticesAdapter noticesAdapter;
+    Switch notifSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,41 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.packages_list);
         listView.addHeaderView(header);
 
-        Set<String> savedNotices = MySharedPreferences.getStringSet(this, MySharedPreferences.GOALS_LIST_NAME);
+        fillNotices(listView);
+        initFab();
+
+        boolean firstRun = MySharedPreferences.getBooleanParameter(this, MySharedPreferences.FIRST_RUN);
+        boolean notificationsTurnedOn = false;
+        if (firstRun) {
+            notificationsTurnedOn = true;
+            MySharedPreferences.setBooleanParameter(this, MySharedPreferences.NOTIFICATIONS_TURNED_ON, notificationsTurnedOn);
+            Core.startNotifications();
+        } else {
+            notificationsTurnedOn = MySharedPreferences.getBooleanParameter(this, MySharedPreferences.NOTIFICATIONS_TURNED_ON);
+        }
+
+        initSwither(notificationsTurnedOn);
+
+    }
+
+    private void initSwither(boolean notificationsTurnedOn) {
+        notifSwitch = findViewById(R.id.periodic_reminder_switch);
+        notifSwitch.setChecked(notificationsTurnedOn);
+        notifSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Core.startNotifications();
+                } else {
+                    Core.stopNotifications();
+                }
+                MySharedPreferences.setBooleanParameter(MainActivity.this, MySharedPreferences.NOTIFICATIONS_TURNED_ON, isChecked);
+            }
+        });
+    }
+
+    private void fillNotices(ListView listView) {
+        Set<String> savedNotices = MySharedPreferences.getStringSet(this, MySharedPreferences.GOALS_LIST);
         if (savedNotices != null) {
             notices = Notice.getNoticeListFromStringList(new ArrayList<>(savedNotices));
         } else {
@@ -65,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_NOTICE_ACTIVITY);
             }
         });
+    }
 
+    private void initFab() {
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                         REQUEST_CODE_NOTICE_ACTIVITY);
             }
         });
-
     }
 
     @Override
@@ -107,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveNotices() {
-        MySharedPreferences.saveStringSet(this, MySharedPreferences.GOALS_LIST_NAME,
+        MySharedPreferences.saveStringSet(this, MySharedPreferences.GOALS_LIST,
                 new HashSet<>(Notice.getStringListFromNoticeList(notices)));
     }
 

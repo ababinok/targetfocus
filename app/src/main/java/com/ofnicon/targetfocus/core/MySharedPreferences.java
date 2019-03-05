@@ -7,8 +7,11 @@ import java.util.Set;
 
 public class MySharedPreferences {
 
-    public static final String GOALS_LIST_NAME = "GOALS LIST";
     private static final String APP_PREFERENCES = "TARGET_FOCUS_SETTINGS";
+
+    public static final String GOALS_LIST = "GOALS_LIST";
+    public static final String NOTIFICATIONS_TURNED_ON = "NOTIFICATIONS_TURNED_ON";
+    public static final String FIRST_RUN = "FIRST_RUN";
 
     static void setStringParameter(Context context, String parameterName, String value) {
         SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -26,14 +29,14 @@ public class MySharedPreferences {
         return result;
     }
 
-    static void setBooleanParameter(Context context, String parameterName, boolean value) {
+    public static void setBooleanParameter(Context context, String parameterName, boolean value) {
         SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(parameterName, value);
         editor.apply();
     }
 
-    static boolean getBooleanParameter(Context context, String parameterName) {
+    public static boolean getBooleanParameter(Context context, String parameterName) {
         SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         boolean result = false;
         if (preferences.contains(parameterName)) {
