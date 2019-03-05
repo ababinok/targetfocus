@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final int RESULT_OK = 10;
     static final int RESULT_DELETE = 11;
-    static final int RESULT_CANCEL = 12;
+    //    static final int RESULT_CANCEL = 12;
     static final String INDEX_FIELD = "index";
     static final String TEXT_FIELD = "text";
     private static final int REQUEST_CODE_NOTICE_ACTIVITY = 0;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         initFab();
 
         boolean firstRun = MySharedPreferences.getBooleanParameter(this, MySharedPreferences.FIRST_RUN);
-        boolean notificationsTurnedOn = false;
+        boolean notificationsTurnedOn;
         if (firstRun) {
             notificationsTurnedOn = true;
             MySharedPreferences.setBooleanParameter(this, MySharedPreferences.NOTIFICATIONS_TURNED_ON, notificationsTurnedOn);
