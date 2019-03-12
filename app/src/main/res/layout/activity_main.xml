@@ -9,6 +9,7 @@
     <ListView
         android:id="@+id/packages_list"
         android:layout_width="match_parent"
+        android:headerDividersEnabled="true"
         android:layout_height="match_parent"
         tools:listheader="@layout/notices_header"
         tools:listitem="@layout/notice_item" />

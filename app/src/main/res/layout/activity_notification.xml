@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingTop="16dp"
     tools:context=".activities.NotificationActivity">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/notification_tv"
-        android:layout_width="match_parent"
+        style="@style/GeneralText"
         android:layout_height="match_parent"
         android:layout_above="@id/share_button"
         android:textAlignment="center"
@@ -25,8 +24,6 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:drawableEnd="@drawable/ic_share_24dp"
-        android:text="@string/share"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-        android:textColor="@color/primary" />
+        android:text="@string/share" />
 
 </RelativeLayout>

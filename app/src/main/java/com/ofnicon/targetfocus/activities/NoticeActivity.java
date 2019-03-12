@@ -1,7 +1,9 @@
 package com.ofnicon.targetfocus.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,7 @@ public class NoticeActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ok_button:
+
                 EditText goalET = findViewById(R.id.goal_et);
                 String text = goalET.getText().toString().trim();
                 if (text.length() == 0) {
@@ -49,10 +52,27 @@ public class NoticeActivity extends AppCompatActivity implements View.OnClickLis
                 setResult(MainActivity.RESULT_OK, intent);
                 finish();
                 break;
+
             case R.id.delete_button:
-                setResult(MainActivity.RESULT_DELETE, new Intent().putExtra(MainActivity.INDEX_FIELD, index));
-                finish();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                setResult(MainActivity.RESULT_DELETE, new Intent().putExtra(MainActivity.INDEX_FIELD, index));
+                                finish();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //nothing
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Удалить цель?").setPositiveButton("ДА", dialogClickListener)
+                        .setNegativeButton("НЕТ", dialogClickListener).show();
                 break;
+
         }
     }
 }

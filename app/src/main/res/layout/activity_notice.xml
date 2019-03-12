@@ -36,8 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@id/button_divider"
-        android:text="@string/save"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:text="@string/save" />
 
     <View
         android:id="@+id/button_divider"
@@ -54,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@id/button_divider"
-        android:text="@string/delete"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:text="@string/delete" />
 
 </RelativeLayout>
